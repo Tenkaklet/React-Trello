@@ -8,13 +8,16 @@ export default class List extends React.Component {
         super(props);
     }
 
-    onAddInputChanged () {
-        console.log('adding input');
-    }
 
+
+    handleChange (e) {
+        const input = e.target.value;
+        this.props.changeTitle(input);
+    }
     onAddSubmit (event) {
         event.preventDefault();
-        console.log('form submitted');
+        const input = event.target.value;
+        this.props.changeTitle(input);
     }
 
     render () {
@@ -24,8 +27,8 @@ export default class List extends React.Component {
                 <Card text="lorem Ipsum One" />
                 <Card text="Lorem Ipsum Two" />
                 <Card text="Lorem Ipsum Three" />
-                <form onSubmit={this.onAddSubmit}>
-                    <input type="text" onChange={this.onAddInputChanged}/>
+                <form onSubmit={this.onAddSubmit.bind(this)}>
+                    <input type="text" onChange={this.handleChange.bind(this)}/>
                     <button type="submit">Submit</button>
                 </form>
             </div>
