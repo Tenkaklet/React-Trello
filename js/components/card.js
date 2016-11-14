@@ -1,10 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-export default function Card (props) {
-    return (
-        <div className="card">
-            <div className="text">{props.text}</div>
-        </div>
-    );
+
+export default class Card extends React.Component {
+    constructor () {
+        super();
+    }
+    render () {
+
+        return (
+            <ul>
+                <li>{this.props.text}</li>
+            </ul>
+        );
+    }
 }
