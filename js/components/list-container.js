@@ -6,18 +6,20 @@ export default class ListContainer extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            input: '',
-            cardArray: []
+            cardArray: ['Hello', 'Goodbye', 'Bonjour']
         };
+        
+        this.handleAddCard = this.handleAddCard.bind(this);
     }
 
-    changeTitle (input) {
-        this.setState({input});
+    handleAddCard (newCardText) {
+        const newCardArray = [ ...this.state.cardArray, newCardText ];
+        this.setState({ cardArray: newCardArray });
     }
     // handlesubmit();
     render () {
         return (
-            <List changeTitle={this.changeTitle.bind(this)} title={this.state.input} />
+            <List cards={this.state.cardArray} handleAddCard={this.handleAddCard} />
         );
     }
 }

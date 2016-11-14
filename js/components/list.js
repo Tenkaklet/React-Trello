@@ -8,30 +8,27 @@ export default class List extends React.Component {
         super(props);
     }
 
-    handleChange (e) {
-        const input = e.target.value;
-        this.props.changeTitle(input);
-    }
     onAddSubmit (event) {
-
         event.preventDefault();
-        const input = event.target.value;
-        this.props.changeTitle(input);
+        // include validator here, e.g.
+        if (this._cardText.value.length < 3) return;
+
+        this.props.handleAddCard(this._cardText.value);
+        this._cardText.value = '';
     }
 
     render () {
 
         return (
             <div className="list">
-                <Card text="lorem Ipsum One" />
-                <Card text="Lorem Ipsum Two" />
-                <Card text="Lorem Ipsum Three" />
-                <Card text={this.props.title} />
+                {this.props.cards.map((card, index) => <Card key={index} text={card} />)}
                 <form onSubmit={this.onAddSubmit.bind(this)}>
-                    <input type="text" onChange={this.handleChange.bind(this)}/>
+                    <input type="text" ref={ref => this._cardText = ref} />
                     <button type="submit">Submit</button>
                 </form>
             </div>
         );
     }
 }
+
+
